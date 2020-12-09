@@ -26,10 +26,11 @@ sub find-contiguous( $i is copy, $invalid )
 
     loop
     {
-        $sum += @numbers[++$i];
+        $sum += @numbers[$i];
         @result.push: @numbers[$i];
         return @result if $sum == $invalid;
         return [] if $sum > $invalid || $i > @numbers.end;
+        $i++;
     }
 }
 
