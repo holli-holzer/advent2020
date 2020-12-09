@@ -1,13 +1,10 @@
 my @program = "puzzle.input".IO.lines;
 
-say run(-1);
+say runx( @program );
+say first { runx( @program, $_ ) },
+    grep { not @program[$_].starts-with: 'acc' }, ^@program;
 
-for (0..^@program).grep({ @program[$_] ~~ /nop|jmp/ })
-{
-    .say and exit if run $_
-}
-
-sub run( $modify )
+sub runx( @program, $modify = -1 )
 {
     my $acc = 0;
     my $pos = 0;

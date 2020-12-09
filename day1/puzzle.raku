@@ -1,5 +1,5 @@
 say [*] flat "puzzle.input"
 	.IO
 	.lines
-	.combinations(2)
+	.combinations(3)
 	.grep: 2020 == *.sum;

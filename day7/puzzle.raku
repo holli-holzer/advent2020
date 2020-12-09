@@ -9,3 +9,5 @@ my &bags  = -> $color {
 	}, @rules };
 
 say + unique bags "shiny gold";
+
+dd @rules;
