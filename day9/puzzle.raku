@@ -10,7 +10,8 @@ sub break-weakness ( $invalid )
 {
     my @contiguous;
 
-    for ^@numbers -> $i {
+    for ^@numbers -> $i
+    {
         return @contiguous.min + @contiguous.max
             if @contiguous = find-contiguous( $i, $invalid);
     }
@@ -23,7 +24,8 @@ sub find-contiguous( $i is copy, $invalid )
     my $sum;
     my @result;
 
-    loop {
+    loop
+    {
         $sum += @numbers[++$i];
         @result.push: @numbers[$i];
         return @result if $sum == $invalid;
@@ -34,21 +36,21 @@ sub find-contiguous( $i is copy, $invalid )
 sub find-invalid
 {
     my $it = @numbers.iterator;
-    my @stack;
+    my @contiguous;
 
-    @stack.push( $it.pull-one ) for 0..24;
+    @contiguous.push( $it.pull-one ) for 0..24;
 
     while not ( my $val = $it.pull-one ) =:= IterationEnd
     {
         my $found = False;
 
-        for @stack X @stack -> ($a, $b) {
+        for @contiguous X @contiguous -> ($a, $b) {
             $found = True if $a + $b == $val && $a != $b }
 
         return $val unless $found;
 
-        @stack.shift;
-        @stack.push: $val;
+        @contiguous.shift;
+        @contiguous.push: $val;
     }
 
     return -1;
