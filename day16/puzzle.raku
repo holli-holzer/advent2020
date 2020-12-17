@@ -6,7 +6,7 @@ my $my-ticket   = $input-data[1].lines[1].&parse-ints;
 my @tickets     = $input-data[2].lines[1..*].map: *.&parse-ints;
 my @all-ranges  = %range-data.values.map: |*;
 my @all-numbers = |@tickets.map: |*;
-my @bad-numbers = @all-numbers.grep: not * ∈ any @all-ranges;
+my @bad-numbers = @all-numbers.grep: not * ∈ @all-ranges.any;
 
 # Part 1
 say [+] @bad-numbers;
